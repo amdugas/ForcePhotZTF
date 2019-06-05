@@ -220,7 +220,7 @@ def download_marshal_lightcurve(name, targetdir):
         r = requests.get('http://skipper.caltech.edu:8080/cgi-bin/growth/plot_lc.cgi?name='+name, 
                          auth=(DEFAULT_AUTH_marshal[0], DEFAULT_AUTH_marshal[1]))
         tables = pd.read_html(r.content)
-        mtb = tables[14]
+        mtb = tables[-1] # changed from last of 15 to last of 17 recently
         mtb = mtb.drop([0], axis=1)
         mtb.to_csv(targetdir+'lightcurves'+'/marshal_lc_'+name+'.csv',header=False, index = False)
     
